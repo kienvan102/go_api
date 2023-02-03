@@ -1,7 +1,7 @@
 # APIs brief
 
-**Get a student**
-----
+## Get a student
+
   Returns json data about a single student.
 
 * **URL**
@@ -56,9 +56,8 @@
     }); -->
   <!-- ``` -->
 
-**Get list of student**
-----
-  Returns json data about list of students.
+## Get list of student
+Returns json data about list of students.
 
 * **URL**
 
