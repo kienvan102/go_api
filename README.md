@@ -94,5 +94,5 @@ Returns json data about list of students.
 * **Sample Call:**
 
   ```
-   <url>/v1/students/?Limit=2&page=2
+  <url>/v1/students/?Limit=2&page=2
   ```
