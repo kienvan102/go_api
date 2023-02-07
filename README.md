@@ -1,7 +1,7 @@
 # GO-APIS
 
 ## Architecture
-Following clean architecture strictly, each service have a module. Currently, only "student" modules have implemented. <br/>
+Following clean architecture strictly, each service have a module. Currently, only "student" module have been implemented. <br/>
 
 Each module have three layer and 1 entity (Model) including:transport, bussiness (namely biz) and storage. Each layer must be independently.
 
