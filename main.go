@@ -4,10 +4,7 @@ import (
 	// "fmt"
 	"fmt"
 	"log"
-	// "net/http"
 	"os"
-	// "strconv"
-	// "encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
@@ -35,7 +32,6 @@ func getDBString() string{
 
 
 func main() {
-	// refer https://github.com/go-sql-driver/mysql#dsn-data-source-name for details
 
 	dsn := "user:pass@tcp(127.0.0.1:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
 	dsn = getDBString();

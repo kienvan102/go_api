@@ -1,5 +1,16 @@
 # GO-APIS
 
+## Environment file 
+
+Needed variables for running on local:
+```
+DB_USER=
+DB_PWD=
+DB_ADDRESS=
+DB_PORT=
+DB_NAME=
+```
+
 ## Architecture
 Following clean architecture strictly, each service have a module. Currently, only "student" module have been implemented. <br/>
 
