@@ -1,98 +1,49 @@
-# APIs brief
+# GO-APIS
 
-## Get a student
+## Architecture
+Following clean architecture strictly, each service have a module. Currently, only "student" modules have implemented. <br/>
 
-  Returns json data about a single student.
+Each module have three layer and 1 entity (Model) including:transport, bussiness (namely biz) and storage. Each layer must be independently.
 
-* **URL**
+* **Transport:**<br/>Recieve HTTP request from client and parse data, response JSON format to client. Then, the rest of task is delegated for Bussiness layer.
 
-  v1/students/
+* **Bussiness** <br/> This layer implement logic or mathametic of services. This layer do not call dicretly to database but continue to delegate for Storage layer.
 
-* **Method:**
+* **Storage** <br/> Storage layer is responsible for storing and retrieving data from database or filesystem.
+## APIS brief
 
-  `GET`
-  
-*  **URL Params**
-
-   **Required:**
+I versionized the APIs, so each endpoint starting with name of version
  
-   `N/A`
 
-* **Data Params**
+|                  **uri**                 | **Method** | **Operation** |                     **description**                     | **Resquest Body**     |        **Response body**       |
+|:----------------------------------------:|:----------:|:-------------:|:-------------------------------------------------------:|-----------------------|:------------------------------:|
+| /v1/student/[:id]                        | GET        | Read          | Get a student by id                                     | N/A                   | a json format of data          |
+| /v1/student/                             | POST       | Create        | Create a new student                                    | a json format of data | code of response               |
+| /v1/student/[:id]                        | PATH       | Update        | Update a student by id                                  | a json format of data | code of response               |
+| /v1/student/?page=[number]&lmit=[number] | GET        | Read          | Get a list of student according to page and limit param | N/A                   | a json format of array of data |
+| /v1/student/[:id]                        | DELETE     | Delete        | Delete a student by id                                  | N/A                   | code of response               |
 
-  None
 
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** `{ id : <numbder of id>, name : strings of name }`
- 
-* **Error Response:**
-
-  * **Code:** 404 NOT FOUND <br />
-    **Content:** `{ error : "User doesn't exist" }`
-
-* **Sample Call:**
-
-  ```
-   <url>/v1/students/
-  ```
-<!-- 
-  OR
-
-  * **Code:** 401 UNAUTHORIZED <br />
-    **Content:** `{ error : "You are unauthorized to make this request." }` -->
-
-<!-- * **Sample Call:**
-
-  ```javascript
-    $.ajax({
-      url: "/users/1",
-      dataType: "json",
-      type : "GET",
-      success : function(r) {
-        console.log(r);
+### Example:
+**Get a student**
+* ***url:***
+```
+<domain>/v1/student/1
+```
+* ***Response body***
+  * ***Code success: 200***<br/>
+    ***Content:
+    ```json
+    {
+    "data": {
+        "id": 9,
+        "fullname": "Stephen Hawking",
+        "sex": "male",
+        "phone": 0,
+        "email": "abc@mail.com"
       }
-    }); -->
-  <!-- ``` -->
-
-## Get list of student
-Returns json data about list of students.
-
-* **URL**
-
-  v1/students/
-
-  `example`
-
-
-* **Method:**
-
-  `GET`
-  
-*  **URL Params**
-
-   **Required:**
- 
-    `id=[integer]`
-
-* **Data Params**
-
-  Limit
-  Page
-
-* **Success Response:**
-
-  * **Code:** 200 <br />
-    **Content:** `{ id : <numbder of id>, name : strings of name }`
- 
-* **Error Response:**
-
+    }
+    ```
+* ***Error response***
   * **Code:** 404 NOT FOUND <br />
     **Content:** `{ error : "User doesn't exist" }`
-
-* **Sample Call:**
-
-  ```
-  <url>/v1/students/?Limit=2&page=2
-  ```
