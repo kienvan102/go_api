@@ -4,14 +4,15 @@ import (
 	// "fmt"
 	"fmt"
 	"log"
-	"net/http"
+	// "net/http"
 	"os"
-	"strconv"
+	// "strconv"
 	// "encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"first-apis/module/student/transport/ginstudent"
 )
 func getDBString() string{
 	err := godotenv.Load(".env")
@@ -31,21 +32,7 @@ func getDBString() string{
   }
 
 
-type Student struct{
-	Id int `json:"id" gorm:"column:id"`
-	FullName string `json:"fullname" gorm:"column:fname"`
-	Sex string `json:"sex" gorm:"column:sex"`
-	Phone int `json:"phone" gorm:"column:phone"`
-	Email string `json:"email" gorm:"column:email"`
-}
 
-type StudentUpdate struct{
-	Phone *int `json:"phone" gorm:"column:phone"`
-	Email *string `json:"email" gorm:"column:email"`
-}
-
-func (Student) TableName() string { return "students" }
-func (StudentUpdate) TableName() string { return Student{}.TableName()}
 
 func main() {
 	// refer https://github.com/go-sql-driver/mysql#dsn-data-source-name for details
@@ -66,127 +53,111 @@ func main() {
 	students := v1.Group("/students")
 
 	/*  [POST]  create a student /v1/students */
-	students.POST("/", func(c *gin.Context){
-		
-		var data Student
-		if err := c.ShouldBind(&data); err != nil{
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
-			})
-
-			return
-		}
-
-		db.Create(&data)
-
-		c.JSON(http.StatusOK, gin.H{
-			"data" : data,
-		})
-	})
+	students.POST("/", ginstudent.CreateStudent(db))
 
 	/* GET one /v1/students /:id */
-	students.GET("/:id", func(c *gin.Context){
-		id, err := strconv.Atoi(c.Param("id"))
+	// students.GET("/:id", func(c *gin.Context){
+	// 	id, err := strconv.Atoi(c.Param("id"))
 		
-		if err != nil{
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
-			})
-		}
+	// 	if err != nil{
+	// 		c.JSON(http.StatusBadRequest, gin.H{
+	// 			"message": err.Error(),
+	// 		})
+	// 	}
 
-		var data Student
-		db.Where("id=?", id).First(&data)
-		c.JSON(http.StatusOK, gin.H{
-			"data" : data,
-		})
+	// 	var data Student
+	// 	db.Where("id=?", id).First(&data)
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"data" : data,
+	// 	})
 
-	})
+	// })
 
-	/* GET list */
-	students.GET("/", func(c *gin.Context){
+	// /* GET list */
+	// students.GET("/", func(c *gin.Context){
 		
-		type Paging struct{
-			Page int `json:"page" form:"page"`
-			Limit int `json:"limit" form:"limit"`
-		}
-		var data []Student
-		var pagingData Paging
+	// 	type Paging struct{
+	// 		Page int `json:"page" form:"page"`
+	// 		Limit int `json:"limit" form:"limit"`
+	// 	}
+	// 	var data []Student
+	// 	var pagingData Paging
 		
-		if err := c.ShouldBind(&pagingData); err != nil{
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
-			})
-			return
-		}
+	// 	if err := c.ShouldBind(&pagingData); err != nil{
+	// 		c.JSON(http.StatusBadRequest, gin.H{
+	// 			"message": err.Error(),
+	// 		})
+	// 		return
+	// 	}
 
-		if pagingData.Page <= 0{
-			pagingData.Page = 1
-		}
+	// 	if pagingData.Page <= 0{
+	// 		pagingData.Page = 1
+	// 	}
 
-		if pagingData.Limit <= 0{
-			pagingData.Page = 5
-		}
+	// 	if pagingData.Limit <= 0{
+	// 		pagingData.Page = 5
+	// 	}
 
-		db.
-		Offset((pagingData.Page - 1)*pagingData.Limit).
-		Order("id desc").
-		Limit(pagingData.Limit).
-		Find(&data)
+	// 	db.
+	// 	Offset((pagingData.Page - 1)*pagingData.Limit).
+	// 	Order("id desc").
+	// 	Limit(pagingData.Limit).
+	// 	Find(&data)
 
-		c.JSON(http.StatusOK, gin.H{
-			"data" : data,
-		})
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"data" : data,
+	// 	})
 
-	})
+	// })
 
-	/*[PATH] Update a student */
-	students.PATCH("/:id", func(c *gin.Context){
-		id, err := strconv.Atoi(c.Param("id"))
-		
-		
-		if err != nil{
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
-			})
-		}
-		var data StudentUpdate
-		if err := c.ShouldBind(&data); err != nil{
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
-			})
-			return
-		}
-
-		if err := db.Where("id=?", id).Updates(&data).Error; err != nil{
-			log.Println(err)
-		}
-
-		c.JSON(http.StatusOK, gin.H{
-			"data" : data,
-		})
-
-	})
-
-	/*[DELETE] Delete by id */
-	students.DELETE("/:id", func(c *gin.Context){
-		id, err := strconv.Atoi(c.Param("id"))
+	// /*[PATH] Update a student */
+	// students.PATCH("/:id", func(c *gin.Context){
+	// 	id, err := strconv.Atoi(c.Param("id"))
 		
 		
-		if err != nil{
-			c.JSON(http.StatusBadRequest, gin.H{
-				"message": err.Error(),
-			})
-		}
+	// 	if err != nil{
+	// 		c.JSON(http.StatusBadRequest, gin.H{
+	// 			"message": err.Error(),
+	// 		})
+	// 	}
+	// 	var data StudentUpdate
+	// 	if err := c.ShouldBind(&data); err != nil{
+	// 		c.JSON(http.StatusBadRequest, gin.H{
+	// 			"message": err.Error(),
+	// 		})
+	// 		return
+	// 	}
+
+	// 	if err := db.Where("id=?", id).Updates(&data).Error; err != nil{
+	// 		log.Println(err)
+	// 	}
+
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"data" : data,
+	// 	})
+
+	// })
+
+	// /*[DELETE] Delete by id */
+	// students.DELETE("/:id", func(c *gin.Context){
+	// 	id, err := strconv.Atoi(c.Param("id"))
 		
-		if err := db.Table(Student{}.TableName()).Where("id=?", id).Delete(nil).Error; err != nil{
-			log.Println(err)
-		}
+		
+	// 	if err != nil{
+	// 		c.JSON(http.StatusBadRequest, gin.H{
+	// 			"message": err.Error(),
+	// 		})
+	// 	}
+		
+	// 	if err := db.Table(Student{}.TableName()).Where("id=?", id).Delete(nil).Error; err != nil{
+	// 		log.Println(err)
+	// 	}
 
-		c.JSON(http.StatusOK, gin.H{
-			"data" : "success",
-		})
+	// 	c.JSON(http.StatusOK, gin.H{
+	// 		"data" : "success",
+	// 	})
 
-	})
+	// })
 
 	r.Run()
 }
