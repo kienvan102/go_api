@@ -24,7 +24,7 @@ func CreateStudent(db *gorm.DB) func(c *gin.Context){
 		// db.Create(&data)
 		store := studentstorage.NewSqlStore(db)
 		biz := studentbiz.NewCreateStudentBiz(store)
-		if err := biz.Create(c.Request.Context(), &data); err!= nil{
+		if err := biz.CreateStudent(c.Request.Context(), &data); err!= nil{
 			c.JSON(http.StatusBadRequest, gin.H{
                 "message": err.Error(),
             })

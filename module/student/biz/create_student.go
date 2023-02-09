@@ -18,7 +18,7 @@ func NewCreateStudentBiz(store CreateStudentStore) *createStudentBiz {
 	return &createStudentBiz{store: store}
 }
 
-func (biz *createStudentBiz) Create(ctx context.Context, data *studentmodel.Student) error {
+func (biz *createStudentBiz) CreateStudent(ctx context.Context, data *studentmodel.Student) error {
     if data.FullName == ""{
 		return errors.New("data is empty")
     }

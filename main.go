@@ -24,7 +24,7 @@ func getDBString() string{
 	db_port := os.Getenv("DB_PORT")
 	db_name := os.Getenv("DB_NAME")
 	dbStr := db_user + ":" + db_pwd + "@tcp(" + db_Add + ":" + db_port + ")/" + db_name + "?charset=utf8mb4&parseTime=True&loc=Local"
-	fmt.Println(dbStr)
+	// fmt.Println(dbStr)
 	return dbStr
   }
 
@@ -50,6 +50,9 @@ func main() {
 
 	/*  [POST]  create a student /v1/students */
 	students.POST("/", ginstudent.CreateStudent(db))
+
+	/*[DELETE] Delete by id */
+	students.DELETE("/:id",ginstudent.DeleteStudentByID(db) )
 
 	/* GET one /v1/students /:id */
 	// students.GET("/:id", func(c *gin.Context){
@@ -134,26 +137,7 @@ func main() {
 
 	// })
 
-	// /*[DELETE] Delete by id */
-	// students.DELETE("/:id", func(c *gin.Context){
-	// 	id, err := strconv.Atoi(c.Param("id"))
-		
-		
-	// 	if err != nil{
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"message": err.Error(),
-	// 		})
-	// 	}
-		
-	// 	if err := db.Table(Student{}.TableName()).Where("id=?", id).Delete(nil).Error; err != nil{
-	// 		log.Println(err)
-	// 	}
-
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"data" : "success",
-	// 	})
-
-	// })
+	
 
 	r.Run()
 }

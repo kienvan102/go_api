@@ -43,7 +43,7 @@ I versionized the APIs, so each endpoint starting with name of version
 ```
 * ***Response body***
   * ***Code success: 200***<br/>
-    ***Content:
+    ***Content:***
     ```json
     {
     "data": {
