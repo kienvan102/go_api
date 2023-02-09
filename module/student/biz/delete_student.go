@@ -2,8 +2,6 @@ package studentbiz
 
 import (
 	"context"
-	// "errors"
-	// studentmodel "first-apis/module/student/model"
 )
 
 type DeleteStudentStore interface{
