@@ -6,7 +6,9 @@ type Student struct{
 	Sex string `json:"sex" gorm:"column:sex"`
 	Phone int `json:"phone" gorm:"column:phone"`
 	Email string `json:"email" gorm:"column:email"`
+	Status int `json:"status" gorm:"column:status"`
 }
+
 func (Student) TableName() string { return "students" }
 
 type StudentCreate struct{

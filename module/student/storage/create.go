@@ -5,7 +5,7 @@ import (
 	studentmodel "first-apis/module/student/model"
 )
 
-func (s *sqlStore) Create(ctx context.Context, data *studentmodel.Student) error{
+func (s *sqlStore) Create(ctx context.Context, data *studentmodel.StudentCreate) error{
 	if err := s.db.Create(&data).Error; err != nil{
 		return err
 	}

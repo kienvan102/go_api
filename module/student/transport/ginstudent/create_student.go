@@ -12,7 +12,7 @@ import (
 func CreateStudent(db *gorm.DB) func(c *gin.Context){
 	return func(c *gin.Context){
 		
-		var data studentmodel.Student
+		var data studentmodel.StudentCreate
 		if err := c.ShouldBind(&data); err != nil{
 			c.JSON(http.StatusBadRequest, gin.H{
 				"message": err.Error(),

@@ -7,7 +7,7 @@ import (
 )
 
 type CreateStudentStore interface {
-	Create(ctx context.Context, data *studentmodel.Student) error
+	Create(ctx context.Context, data *studentmodel.StudentCreate) error
 }
 
 type createStudentBiz struct{
@@ -18,7 +18,7 @@ func NewCreateStudentBiz(store CreateStudentStore) *createStudentBiz {
 	return &createStudentBiz{store: store}
 }
 
-func (biz *createStudentBiz) CreateStudent(ctx context.Context, data *studentmodel.Student) error {
+func (biz *createStudentBiz) CreateStudent(ctx context.Context, data *studentmodel.StudentCreate) error {
     if data.FullName == ""{
 		return errors.New("data is empty")
     }
