@@ -25,15 +25,13 @@ Each module have three layer and 1 entity (Model) including:transport, bussiness
 
 I versionized the APIs, so each endpoint starting with name of version
  
-
-|                  **uri**                 | **Method** | **Operation** |                     **description**                     | **Resquest Body**     |        **Response body**       |
-|:----------------------------------------:|:----------:|:-------------:|:-------------------------------------------------------:|-----------------------|:------------------------------:|
-| /v1/student/[:id]                        | GET        | Read          | Get a student by id                                     | N/A                   | a json format of data          |
-| /v1/student/                             | POST       | Create        | Create a new student                                    | a json format of data | code of response               |
-| /v1/student/[:id]                        | PATH       | Update        | Update a student by id                                  | a json format of data | code of response               |
-| /v1/student/?page=[number]&lmit=[number] | GET        | Read          | Get a list of student according to page and limit param | N/A                   | a json format of array of data |
-| /v1/student/[:id]                        | DELETE     | Delete        | Delete a student by id, this is a soft delete                                | N/A                   | code of response               |
-
+|                  **uri**                 | **Method** | **Operation** |                     **Description**                     | **Status** |   **Resquest Body**   |        **Response body**       |
+|:----------------------------------------:|:----------:|:-------------:|:-------------------------------------------------------:|:----------:|:---------------------:|:------------------------------:|
+| /v1/student/[:id]                        | GET        | Read          | Get a student by id                                     | N/A        | N/A                   | a json format of data          |
+| /v1/student/                             | POST       | Create        | Create a new student                                    | Available  | a json format of data | code of response               |
+| /v1/student/[:id]                        | PATH       | Update        | Update a student by id                                  | N/A        | a json format of data | code of response               |
+| /v1/student/?page=[number]&lmit=[number] | GET        | Read          | Get a list of student according to page and limit param | N/A        | N/A                   | a json format of array of data |
+| /v1/student/[:id]                        | DELETE     | Delete        | Delete a student by id (soft deletion)                  | Available  | N/A                   | code of response               |
 
 ### Example:
 **Get a student**
