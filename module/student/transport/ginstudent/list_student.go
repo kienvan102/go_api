@@ -29,7 +29,7 @@ func ListStudent(db *gorm.DB) func(c *gin.Context){
 		store := studentstorage.NewSqlStore(db)
 		biz := studentbiz.NewListStudentBiz(store)
 		data, err := biz.ListStudent(c.Request.Context(), paging);
-		if  err!= nil{
+		if  err != nil{
 			c.JSON(http.StatusBadRequest, gin.H{
                 "message": err.Error(),
             })

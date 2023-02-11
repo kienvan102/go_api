@@ -18,9 +18,14 @@ func NewListStudentBiz(store ListStudentStore) *listStudentBiz {
 }
 
 func (b *listStudentBiz) ListStudent(ctx context.Context, paging studentmodel.Paging) ([]studentmodel.Student, error) {
-	
+	if paging.Page < 0{
+		paging.Page = 1
+	}
+	if paging.Limit < 0{
+        paging.Limit = 5
+    }
 	data, err := b.store.List(ctx, paging)
-	if err!= nil {
+	if err != nil {
         return nil, err
     }
 
