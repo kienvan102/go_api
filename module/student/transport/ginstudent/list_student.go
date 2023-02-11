@@ -42,30 +42,3 @@ func ListStudent(db *gorm.DB) func(c *gin.Context){
 		})
 	}
 }
-	//func(c *gin.Context){
-		
-
-	// 	var data []Student
-	// 	var pagingData Paging
-		
-	
-
-	// 	if pagingData.Page <= 0{
-	// 		pagingData.Page = 1
-	// 	}
-
-	// 	if pagingData.Limit <= 0{
-	// 		pagingData.Page = 5
-	// 	}
-
-	// 	db.
-	// 	Offset((pagingData.Page - 1)*pagingData.Limit).
-	// 	Order("id desc").
-	// 	Limit(pagingData.Limit).
-	// 	Find(&data)
-
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"data" : data,
-	// 	})
-
-	// }
