@@ -16,7 +16,8 @@ Following clean architecture strictly, each service have a module. Currently, on
 
 Each module have three layer and 1 entity (Model) including:transport, bussiness (namely biz) and storage. Each layer must be independently.
 
-* **Transport:**<br/>Recieve HTTP request from client and parse data, response JSON format to client. Then, the rest of task is delegated for Bussiness layer.
+* **Transport:**<br/>Recieve HTTP request from client and parse data, response JSON format to client. Then, the rest of task is delegated for Bussiness layer.<br/>
+In future, it could be more than 1 protocol of connection such as socket I/O.
 
 * **Bussiness** <br/> This layer implement logic or mathametic of services. This layer do not call dicretly to database but continue to delegate for Storage layer.
 
