@@ -95,36 +95,6 @@ func main() {
 
 	// })
 
-	// /*[PATH] Update a student */
-	// students.PATCH("/:id", func(c *gin.Context){
-	// 	id, err := strconv.Atoi(c.Param("id"))
-		
-		
-	// 	if err != nil{
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"message": err.Error(),
-	// 		})
-	// 	}
-	// 	var data StudentUpdate
-	// 	if err := c.ShouldBind(&data); err != nil{
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"message": err.Error(),
-	// 		})
-	// 		return
-	// 	}
-
-	// 	if err := db.Where("id=?", id).Updates(&data).Error; err != nil{
-	// 		log.Println(err)
-	// 	}
-
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"data" : data,
-	// 	})
-
-	// })
-
-	
-
 	r.Run()
 }
 
