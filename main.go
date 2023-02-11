@@ -10,6 +10,7 @@ import (
 	"gorm.io/gorm"
 	"first-apis/module/student/transport/ginstudent"
 )
+ 
 func getDBString() string{
 	err := godotenv.Load(".env")
 
@@ -25,8 +26,6 @@ func getDBString() string{
 	dbStr := db_user + ":" + db_pwd + "@tcp(" + db_Add + ":" + db_port + ")/" + db_name + "?charset=utf8mb4&parseTime=True&loc=Local"
 	return dbStr
   }
-
-
 
 
 func main() {

@@ -2,7 +2,7 @@
 
 ## Environment file 
 
-Needed variables for running on local:
+Needed variables for configuration of database:
 ```
 DB_USER=
 DB_PWD=

@@ -20,7 +20,11 @@ func NewCreateStudentBiz(store CreateStudentStore) *createStudentBiz {
 
 func (biz *createStudentBiz) CreateStudent(ctx context.Context, data *studentmodel.StudentCreate) error {
     if data.FullName == ""{
-		return errors.New("data is empty")
+		return errors.New("fullname could not be empty")
+    }
+
+	if data.Sex == ""{
+		return errors.New("gentle could not be empty")
     }
 	
 	if err := biz.store.Create(ctx, data); err != nil {
