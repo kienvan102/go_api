@@ -30,7 +30,7 @@ I versionized the APIs, so each endpoint starting with name of version
 | /v1/student/[:id]                        | GET        | Read          | Get a student by id                                     | Available       | N/A                   | a json format of data          |
 | /v1/student/                             | POST       | Create        | Create a new student                                    | Available  | a json format of data | code of response               |
 | /v1/student/[:id]                        | PATH       | Update        | Update a student by id                                  | Available        | a json format of data | code of response               |
-| /v1/student/?page=[number]&lmit=[number] | GET        | Read          | Get a list of student according to page and limit param | N/A        | N/A                   | a json format of array of data |
+| /v1/student/?page=[number]&lmit=[number] | GET        | Read          | Get a list of student according to page and limit param | Available        | N/A                   | a json format of array of data |
 | /v1/student/[:id]                        | DELETE     | Delete        | Delete a student by id (soft deletion)                  | Available  | N/A                   | code of response               |
 
 ### Example:

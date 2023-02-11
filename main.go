@@ -58,42 +58,9 @@ func main() {
 	/*[PATH] Update a student */
 	students.PATCH("/:id", ginstudent.UpdateStudent(db))
 
-	// /* GET list */
-	// students.GET("/", func(c *gin.Context){
-		
-	// 	type Paging struct{
-	// 		Page int `json:"page" form:"page"`
-	// 		Limit int `json:"limit" form:"limit"`
-	// 	}
-	// 	var data []Student
-	// 	var pagingData Paging
-		
-	// 	if err := c.ShouldBind(&pagingData); err != nil{
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"message": err.Error(),
-	// 		})
-	// 		return
-	// 	}
+	/* GET list of student */
+	students.GET("/", ginstudent.ListStudent(db))
 
-	// 	if pagingData.Page <= 0{
-	// 		pagingData.Page = 1
-	// 	}
-
-	// 	if pagingData.Limit <= 0{
-	// 		pagingData.Page = 5
-	// 	}
-
-	// 	db.
-	// 	Offset((pagingData.Page - 1)*pagingData.Limit).
-	// 	Order("id desc").
-	// 	Limit(pagingData.Limit).
-	// 	Find(&data)
-
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"data" : data,
-	// 	})
-
-	// })
 
 	r.Run()
 }
