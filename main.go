@@ -53,22 +53,10 @@ func main() {
 	students.DELETE("/:id",ginstudent.DeleteStudentByID(db) )
 
 	/* GET one /v1/students /:id */
-	// students.GET("/:id", func(c *gin.Context){
-	// 	id, err := strconv.Atoi(c.Param("id"))
-		
-	// 	if err != nil{
-	// 		c.JSON(http.StatusBadRequest, gin.H{
-	// 			"message": err.Error(),
-	// 		})
-	// 	}
+	students.GET("/:id", ginstudent.GetStudentByID(db))
 
-	// 	var data Student
-	// 	db.Where("id=?", id).First(&data)
-	// 	c.JSON(http.StatusOK, gin.H{
-	// 		"data" : data,
-	// 	})
-
-	// })
+	/*[PATH] Update a student */
+	students.PATCH("/:id", ginstudent.UpdateStudent(db))
 
 	// /* GET list */
 	// students.GET("/", func(c *gin.Context){
